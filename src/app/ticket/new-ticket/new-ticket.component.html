@@ -1,0 +1,263 @@
+<div class="col-lg-12">
+    <div class='panel panel-default'>
+        <div class='panel-heading'>
+            New Ticket
+        </div>
+        <div class='panel-body'>
+
+            <form [formGroup]="newTicketForm">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <!-- <input matInput placeholder="NARB Review Date"> -->
+                            <input matInput [matDatepicker]="picker" placeholder="NARB Review Date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <input matInput placeholder="JIRA Ticket#" formControlName="JIRATicket">
+                            <mat-error *ngIf="newTicketForm.controls['JIRATicket'].errors?.required">
+                                    Email is <strong>required</strong>
+                                  </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <input matInput placeholder="Name">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <!-- <mat-slide-toggle class="example-margin">
+                        External API
+                    </mat-slide-toggle> -->
+                        <mat-radio-group class="example-radio-group" >
+                            <mat-radio-button class="example-radio-button" value="Internal">
+                                Internal
+                            </mat-radio-button>
+                            <mat-radio-button class="example-radio-button" value="External">
+                                External
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-checkbox class="example-margin" >Notified In JIRA
+                        </mat-checkbox>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-checkbox class="example-margin">Added To Invite
+                        </mat-checkbox>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-checkbox class="example-margin" >Reviewed?
+                        </mat-checkbox>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-select placeholder="Status">
+                                <mat-option *ngFor="let x of ticketStatus" [value]="x.value">
+                                    {{ x.viewValue }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker1" placeholder="Refactor Date">
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <input matInput placeholder="API Name">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <input matInput placeholder="API Version">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-radio-group class="example-radio-group" >
+                            <mat-radio-button class="example-radio-button" value="NewAPI">
+                                New API
+                            </mat-radio-button>
+                            <mat-radio-button class="example-radio-button" value="ExistingAPI">
+                                Existing API
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="Level 0 Capability">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="Level 1 Capability">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="Level 2 Capability">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="width100p">
+                            <textarea matInput placeholder="Value Proposition"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-select placeholder="Type">
+                                <mat-option *ngFor="let x of apiType" [value]="x.value">
+                                    {{ x.Name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field>
+                            <mat-select placeholder="Client Segments">
+                                <mat-option *ngFor="let x of clientSegments" [value]="x.value">
+                                    {{ x.Name }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="width100p">
+                            <textarea matInput placeholder="Revenue Model"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="width100p">
+                            <textarea matInput placeholder="Revenue Generation (Monthly)"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="width100p">
+                            <textarea matInput placeholder="Estimated Cost to Build"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="Savings (monthly)">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="LOE (Person Hours)">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="Duration (weeks)">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="Average Number of Calls">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="API Dependencies">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="width100p">
+                            <textarea matInput placeholder="Data Source(s)"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="width100p">
+                            <textarea matInput placeholder="Entitlement Service"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="width100p">
+                            <textarea matInput placeholder="Business Unit"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="Business Product Owner">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="Requestor">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="Project Manager">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="Technical Lead">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="DCA">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field class="width100p">
+                            <input matInput placeholder="Business Analyst">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="picker2" placeholder="Target Date">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="width100p">
+                            <textarea matInput placeholder="Notes"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-offset-4 col-md-2">
+
+                        <button mat-raised-button color="primary">Create Ticket</button>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

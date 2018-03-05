@@ -1,0 +1,64 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+    /*background: rgba(203, 203, 210, 0.15);*/
+    background:#fff;
+}
+  .navbar-default {
+    background-color: #205081;
+  
+    color: #fff;
+    border-bottom-color: #2e3d54;
+}
+.navbar {
+    border: 0;
+    font-size: 16px;
+    border-radius: 0;
+}
+.navbar-default .navbar-brand {
+    color: #fff !important;
+}
+
+#footer .footer-body {
+    color: #707070;
+    background-color: #f5f5f5;
+    font-size: 12px;
+    line-height: 1.66666666666667;
+   
+    padding: 0 10px 21px 10px;
+    min-height: 44px;
+    text-align: center;
+}
+#footer .footer-body>ul {
+    display: block;
+    font-size: 0;
+    list-style: none;
+    padding: 0;
+}
+ #footer {
+    clear: both;
+    float: left;
+    width: 100%;
+}
+.main-panel .navbar {
+    margin-bottom: 0;
+}
+.main-panel {
+    background: #fff;
+    position: relative;
+    z-index: 2;
+    float: right;
+    width: 100%;
+    min-height: 100%;
+    overflow: auto;
+}
+
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+  .width100p
+  {
+      width: 100%;
+  }

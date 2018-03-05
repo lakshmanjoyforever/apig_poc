@@ -1,0 +1,143 @@
+<form class="form-horizontal" [formGroup]="questionnaireFormGroup">
+    <div class="col-lg-12" *ngIf="!jiraTicket">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 style="color:red;">Invalid JIRA Ticket Number found, Please try again!!!!</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12" *ngIf="jiraTicket">
+
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Basic Information</h3>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="firstName" class="col-sm-2 control-label">Your Name</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" formControlName="Name">
+                        <span class="help-inline" *ngIf="questionnaireFormGroup.controls['Name'].touched && questionnaireFormGroup.controls['Name'].errors?.required">
+                            Name is required
+                        </span>
+                        <!-- <span class="help-block">Last Name, First Name, eg.: Smith, Harry</span> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">JIRA Ticket#</label>
+                    <div class="col-sm-4">
+                        <input type="text" [value]="jiraTicket" formControlName="jiraTicket" disabled="disabled" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">API Type</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" formControlName="apiType">
+                        <span class="help-inline" *ngIf="questionnaireFormGroup.controls['apiType'].touched && questionnaireFormGroup.controls['apiType'].errors?.required">
+                            API Type is required
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">SDLC Stage</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" formControlName="sdlcStage">
+                        <span class="help-inline" *ngIf="questionnaireFormGroup.controls['sdlcStage'].touched && questionnaireFormGroup.controls['sdlcStage'].errors?.required">
+                            SDLC Stage is required
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Business Analyst</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" formControlName="businessAnalyst">
+                        <span class="help-inline" *ngIf="questionnaireFormGroup.controls['businessAnalyst'].touched && questionnaireFormGroup.controls['businessAnalyst'].errors?.required">
+                            Business Analyst is required
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Business Information</h3>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Business Capacity</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" formControlName="businessCapacity">
+                        <span class="help-inline" *ngIf="questionnaireFormGroup.controls['businessCapacity'].touched && questionnaireFormGroup.controls['businessCapacity'].errors?.required">
+                            Business Capacity is required
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Value Proposition</label>
+                    <div class="col-sm-4">
+                        <textarea class="form-control" formControlName="valueProposition"></textarea>
+                        <span class="help-inline" *ngIf="questionnaireFormGroup.controls['valueProposition'].touched && questionnaireFormGroup.controls['valueProposition'].errors?.required">
+                            Value Proposition is required
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Client Segments</label>
+                    <div class="col-sm-4">
+                        <textarea class="form-control" formControlName="clientSegments"></textarea>
+                        <span class="help-inline" *ngIf="questionnaireFormGroup.controls['clientSegments'].touched && questionnaireFormGroup.controls['clientSegments'].errors?.required">
+                            Client Segments is required
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Revenue</h3>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Revenue Model</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" formControlName="revenueModel">
+                        <span class="help-inline" *ngIf="questionnaireFormGroup.controls['revenueModel'].touched && questionnaireFormGroup.controls['revenueModel'].errors?.required">
+                            Revenue Model is required
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Revenue Generation</label>
+                    <div class="col-sm-4">
+                        <textarea class="form-control" formControlName="revenueGeneration"></textarea>
+                        <span class="help-inline" *ngIf="questionnaireFormGroup.controls['revenueGeneration'].touched && questionnaireFormGroup.controls['revenueGeneration'].errors?.required">
+                            Revenue Generation is required
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-4">
+                        <button (click)="saveDetails()" class="btn btn-primary">Save Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
