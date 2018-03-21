@@ -2,13 +2,20 @@
 
 <div class="wrapper">
     <div class="main-panel">
+        <!-- {{title}}
+        {{showLoader}}
+        diplay loader : {{displayLoader}}
+        <h2 [hidden]="!displayLoader">sdfsfsdfsdfsdfsdf</h2> -->
+
         <navbar-cmp></navbar-cmp>
         <div class="container">
             <div class="row">
               <br>
             <!-- <new-ticket-app></new-ticket-app> -->
             <!-- <questionnaire-app></questionnaire-app> -->
-            <router-outlet></router-outlet>
+            <router-outlet>
+                <div [hidden]="!displayLoader" class="loading">{{showLoader}}</div>
+            </router-outlet>
             <br>
       </div>
       </div>

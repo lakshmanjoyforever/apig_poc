@@ -1,5 +1,11 @@
 <form class="form-horizontal" [formGroup]="newAPIFormGroup">
-
+        <!-- <div class="col-lg-12" *ngIf="!message">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 style="color:red;">hhh</h3>
+                    </div>
+                </div>
+            </div> -->
     <div class="col-lg-12">
         <div class="row">
             <div class="col-md-12">
@@ -9,16 +15,37 @@
         </div>
         <div class="row">
             <div class="form-group">
-                <label class="col-sm-4 control-label">Enter JIRA Ticket#</label>
+                <label class="col-sm-4 control-label">Enter API Name</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" formControlName="JIRATicket">
-                    <span class="help-inline" *ngIf="newAPIFormGroup.controls['JIRATicket'].touched && newAPIFormGroup.controls['JIRATicket'].errors?.required">
-                        JIRA Ticket is required
+                    <input type="text" class="form-control" formControlName="APIName">
+                    <span class="help-inline" *ngIf="newAPIFormGroup.controls['APIName'].touched && newAPIFormGroup.controls['APIName'].errors?.required">
+                       API Name is required
                     </span>
                 </div>
             </div>
         </div>
-
+        <div class="row">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">API Type</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" formControlName="APIType">
+                        <span class="help-inline" *ngIf="newAPIFormGroup.controls['APIType'].touched && newAPIFormGroup.controls['APIType'].errors?.required">
+                           API Type is required
+                        </span>
+                    </div>
+                </div>
+            </div>
+        <div class="row">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Enter JIRA Ticket#</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" formControlName="JIRATicket">
+                        <span class="help-inline" *ngIf="newAPIFormGroup.controls['JIRATicket'].touched && newAPIFormGroup.controls['JIRATicket'].errors?.required">
+                            JIRA Ticket is required
+                        </span>
+                    </div>
+                </div>
+            </div>
         <div class="row">
             <div class="form-group">
                 <div class="col-sm-offset-4 col-sm-5">

@@ -10,19 +10,26 @@ import { NavbarModule } from './shared/navbar/navbar.module';
 import { NewTicketComponent } from './ticket/new-ticket/new-ticket.component';
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 import { NewAPIComponent } from './newapi/newapi.component';
+import { APIInfoComponent } from './apiinfo/apiinfo.component';
+
 import { PageNotFoundComponent } from './other/pagenotfound.component';
 import { Routes, RouterModule }  from '@angular/router';
+
 
 //Services
 
 import { APIService } from '../providers/api-service';
+import { LoaderService } from '../providers/loader-service';
+
+import { DataTableModule } from './data-table';
 
 const appRoutes:Routes=[
+  {path:'apidetails', component:APIInfoComponent},
   {path:'newticket', component:NewAPIComponent},
   {path:'new', component:NewTicketComponent},
   {path:'question', component:QuestionnaireComponent},
   {path:'pagenotfound', component:PageNotFoundComponent},
-  {path:'', redirectTo:'/newticket', pathMatch:'full'}
+  {path:'', redirectTo:'/apidetails', pathMatch:'full'}
 ];
 
 @NgModule({
@@ -31,7 +38,8 @@ const appRoutes:Routes=[
     NewTicketComponent,
     QuestionnaireComponent,
     NewAPIComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    APIInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -51,9 +59,10 @@ const appRoutes:Routes=[
     FooterModule,
     NavbarModule,
     RouterModule.forRoot(appRoutes),
+    DataTableModule
 
   ],
-  providers: [APIService],
+  providers: [APIService, LoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { APIService } from '../../providers/api-service';
+import { LoaderService } from '../../providers/loader-service';
+
 import { IQuestionnaireVM } from '../../models/questionnaire-vm'
+import { IAPIMainVM } from '../../models/apimain-vm'
 
 @Component({
     selector: 'questionnaire-app',
@@ -11,23 +15,27 @@ import { IQuestionnaireVM } from '../../models/questionnaire-vm'
 
 export class QuestionnaireComponent implements OnInit {
 
+    apiMainId:number=0;
     questionnaireFormGroup: FormGroup;
     jiraTicket: string;
     questionnaireVM: IQuestionnaireVM;
+    apiMainVM:IAPIMainVM;
+    isDataAvailable:boolean=false
 
     constructor(private _apiService: APIService,
+        private _loaderService: LoaderService,
         private route: ActivatedRoute,
         private router: Router) {
-
-        this.setFormGroup();
-        this.questionnaireVM={ Name:'', JIRATicket:'',BusinessAnalyst:'',APIType:'',SDLCStage:''} ;
+         this.questionnaireVM= new IQuestionnaireVM();
     }
 
     setFormGroup() {
+      
         this.questionnaireFormGroup = new FormGroup({
             'Name': new FormControl('', Validators.required),
-            'jiraTicket': new FormControl({value: 'Nancy', disabled: true}, Validators.required),
-            'apiType': new FormControl('', Validators.required),
+            'jiraTicket': new FormControl({value: this.apiMainVM.JIRATicket, disabled: true}, Validators.required),
+            'apiName': new FormControl({value: this.apiMainVM.APIName, disabled: true}, Validators.required),
+            'apiType': new FormControl(this.apiMainVM.APIType, Validators.required),
             'sdlcStage': new FormControl('', Validators.required),
             'businessAnalyst': new FormControl('', Validators.required),
             'businessCapacity': new FormControl('', Validators.required),
@@ -45,24 +53,39 @@ export class QuestionnaireComponent implements OnInit {
                 this.router.navigate(['/pagenotfound']);
             }
             else {
+                console.log('ngOnInit');
                 this.decryptValue(params['id']);
             }
         })
     }
 
     decryptValue(encryptText: string) {
-        this.jiraTicket ="12345";
-      /*
+        
+        this._loaderService.togglePageLoader(true);
+
         this._apiService.getDecryptValue(encryptText).subscribe(response => {
-            this.jiraTicket = response;
+         console.log(response);
+         console.log('Assiged Object');
+            this.apiMainVM = response;
+            console.log(this.apiMainVM);
+            this.apiMainId=response.ApiMainId;
+            alert(this.apiMainId);
+            this.questionnaireVM.APIMainId=this.apiMainVM.ApiMainId;
+            this.jiraTicket=this.apiMainVM.JIRATicket;
+            this.isDataAvailable=true;
+            this.setFormGroup();
+
+            this._loaderService.togglePageLoader(false);
+
         }, (error) => {
             // Error
+            alert('Error !!!!');
+            this._loaderService.togglePageLoader(false);
         });
-        */
     }
 
     saveDetails() {
-        console.log('ddddd');
+       alert(this.apiMainId);
         this.questionnaireFormGroup.controls['Name'].markAsTouched();
         this.questionnaireFormGroup.controls['apiType'].markAsTouched();
         this.questionnaireFormGroup.controls['sdlcStage'].markAsTouched();
@@ -72,14 +95,16 @@ export class QuestionnaireComponent implements OnInit {
         this.questionnaireFormGroup.controls['clientSegments'].markAsTouched();
         this.questionnaireFormGroup.controls['revenueModel'].markAsTouched();
         this.questionnaireFormGroup.controls['revenueGeneration'].markAsTouched();
-alert(this.questionnaireFormGroup.value.Name);
-     //   this.questionnaireVM.JIRATicket = this.questionnaireFormGroup.value.JIRATicket;
-        this.questionnaireVM.Name = this.questionnaireFormGroup.value.Name;
-        this.questionnaireVM.BusinessAnalyst = this.questionnaireFormGroup.value.BusinessAnalyst;
+
+        this.questionnaireVM.APIMainId=this.apiMainId;
+        this.questionnaireVM.CreatedBy = this.questionnaireFormGroup.value.Name;
+        this.questionnaireVM.BusinessCapabilities = this.questionnaireFormGroup.value.businessCapacity;
+        this.questionnaireVM.ValueProposition = this.questionnaireFormGroup.value.valueProposition;
+        this.questionnaireVM.ClientSegments = this.questionnaireFormGroup.value.clientSegments;
+        this.questionnaireVM.RevenueModel = this.questionnaireFormGroup.value.revenueModel;
+        this.questionnaireVM.RevenueGeneration = this.questionnaireFormGroup.value.revenueGeneration;
+
 console.log(  this.questionnaireVM);
-let aa={
-    Name:"aaaaaa"
-};
 
         this._apiService.saveQuestionnaire(this.questionnaireVM).subscribe(response => {
             alert(response);

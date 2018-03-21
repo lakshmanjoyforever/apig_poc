@@ -1,0 +1,61 @@
+<div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
+        <data-table id="persons-grid"
+            headerTitle="API Details"
+            [items]="items"
+            [itemCount]="itemCount"
+            (reload)="reloadItems($event)"
+            [indexColumn]='false'
+            [selectColumn]='false'
+            [substituteRows]="false"
+           
+            >
+            <data-table-column
+                [property]="'APIName'"
+                [header]="'API Name'"
+                [sortable]="true"
+                [resizable]="true">
+            </data-table-column>
+            <!-- <data-table-column
+                [property]="'date'"
+                [header]="'Date'"
+                [sortable]="true">
+                <ng-template #dataTableCell let-item="item">
+                    <span>{{item.date | date:'yyyy-MM-dd'}}</span>
+                </ng-template>
+            </data-table-column> -->
+            <data-table-column
+                property="JIRATicket"
+                header="JIRA Ticket"
+                >
+            </data-table-column>
+            <!-- <data-table-column
+                [property]="'jobTitle'"
+                [header]="'Job title'"
+                [visible]="false">
+            </data-table-column> -->
+            <data-table-column
+            [property]="'APIType'"
+            [header]="'API Type'"
+            [sortable]="true">
+        </data-table-column>
+        <data-table-column
+        [property]="'CapabilityOwner'"
+        [header]="'Capability Owner'"
+        [sortable]="true">
+    </data-table-column>
+    <data-table-column
+    [property]="'CapabilityName'"
+    [header]="'Capability Name'"
+    width="250px"
+    [sortable]="true">
+</data-table-column>
+<data-table-column
+[property]="'ResourceName'"
+[header]="'Resource Name'"
+width="250px"
+[sortable]="true">
+</data-table-column>
+          
+        </data-table>
+    </div>
+    
