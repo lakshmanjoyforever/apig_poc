@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Response } from '@angular/http';
 import { Headers } from '@angular/http';
 import { IQuestionnaireVM } from '../models/questionnaire-vm'
+
+import {AppConstants} from '../common/app-constants'
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -11,15 +14,10 @@ export class APIService {
     _url: string;
     public headers;
     
-    constructor(public http: Http) {
-        this.headers = new Headers({
-           'Accept':'application/json',
-            'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/json'
-          });
-          // Need to Change
-       // this._url= "http://localhost:63529/api/";
-       this._url= "http://localhost:8080/api/";
+    constructor(public http: Http , public appConstants: AppConstants) {
+       
+          this.headers = appConstants.headers;
+          this._url=appConstants.apiUrl;
     }
    
     getQuestionnaireURL(apiName:string, apiType:string, jiraTicket: string) {

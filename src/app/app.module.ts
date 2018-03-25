@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {TableModule} from 'primeng/table';
+import {MultiSelectModule} from 'primeng/multiselect';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,7 +23,11 @@ import { Routes, RouterModule }  from '@angular/router';
 import { APIService } from '../providers/api-service';
 import { LoaderService } from '../providers/loader-service';
 
-import { DataTableModule } from './data-table';
+// Constants
+
+import { AppConstants } from '../common/app-constants';
+
+//import { DataTableModule } from './data-table';
 
 const appRoutes:Routes=[
   {path:'apidetails', component:APIInfoComponent},
@@ -59,10 +65,11 @@ const appRoutes:Routes=[
     FooterModule,
     NavbarModule,
     RouterModule.forRoot(appRoutes),
-    DataTableModule
+    MultiSelectModule,
+    TableModule
 
   ],
-  providers: [APIService, LoaderService],
+  providers: [APIService, LoaderService, AppConstants],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,61 +1,33 @@
-<div style="margin: auto; max-width: 1000px; margin-bottom: 50px;">
-        <data-table id="persons-grid"
-            headerTitle="API Details"
-            [items]="items"
-            [itemCount]="itemCount"
-            (reload)="reloadItems($event)"
-            [indexColumn]='false'
-            [selectColumn]='false'
-            [substituteRows]="false"
-           
-            >
-            <data-table-column
-                [property]="'APIName'"
-                [header]="'API Name'"
-                [sortable]="true"
-                [resizable]="true">
-            </data-table-column>
-            <!-- <data-table-column
-                [property]="'date'"
-                [header]="'Date'"
-                [sortable]="true">
-                <ng-template #dataTableCell let-item="item">
-                    <span>{{item.date | date:'yyyy-MM-dd'}}</span>
-                </ng-template>
-            </data-table-column> -->
-            <data-table-column
-                property="JIRATicket"
-                header="JIRA Ticket"
-                >
-            </data-table-column>
-            <!-- <data-table-column
-                [property]="'jobTitle'"
-                [header]="'Job title'"
-                [visible]="false">
-            </data-table-column> -->
-            <data-table-column
-            [property]="'APIType'"
-            [header]="'API Type'"
-            [sortable]="true">
-        </data-table-column>
-        <data-table-column
-        [property]="'CapabilityOwner'"
-        [header]="'Capability Owner'"
-        [sortable]="true">
-    </data-table-column>
-    <data-table-column
-    [property]="'CapabilityName'"
-    [header]="'Capability Name'"
-    width="250px"
-    [sortable]="true">
-</data-table-column>
-<data-table-column
-[property]="'ResourceName'"
-[header]="'Resource Name'"
-width="250px"
-[sortable]="true">
-</data-table-column>
-          
-        </data-table>
-    </div>
-    
+
+ <button (click)="showFilters()" class="btn btn-primary">
+        <i class="fa fa-filter" style="font-size:18px"></i>
+ </button>
+
+<br>
+    <p-table #dt [columns]="cols" [value]="items" [paginator]="true" [rows]="50" >
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th style="width:20%" *ngFor="let col of columns" [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+                <tr *ngIf="displayFilters" >
+                    <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                        <input *ngSwitchCase="'APIName'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                        <input *ngSwitchCase="'JIRATicket'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                        <p-multiSelect  [style]="{'width':'100%'}" *ngSwitchCase="'APIType'" [options]="colors" defaultLabel="API Type" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>              
+                        <input *ngSwitchCase="'CapabilityOwner'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                        <input *ngSwitchCase="'CapabilityName'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                        <input *ngSwitchCase="'ResourceName'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns">
+                        {{rowData[col.field]}}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>

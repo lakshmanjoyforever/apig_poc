@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 import { APIService } from '../../providers/api-service';
 import { LoaderService } from '../../providers/loader-service';
+import {AppConstants} from '../../common/app-constants'
 
 import { Router } from '@angular/router';
 
@@ -18,7 +19,8 @@ export class NewAPIComponent {
     isSuccess:boolean;
     message:string;
 
-    constructor(private _apiService: APIService,private _loaderService: LoaderService, private router: Router) {
+    constructor(private _apiService: APIService,private _loaderService: LoaderService, 
+        private router: Router , public appConstants: AppConstants) {
         this.newAPIFormGroup = new FormGroup({
             'APIName': new FormControl('', Validators.required),
             'APIType': new FormControl('', Validators.required),
@@ -28,7 +30,7 @@ export class NewAPIComponent {
         this.questionnaireURL = '';
         this.message='';
         // Need to Change
-        this._url = "http://localhost:4200/question?id=";
+        this._url = appConstants.applicationUrl+ "question?id=";
         this.isSuccess=false;
     }
 
